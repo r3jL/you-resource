@@ -51,7 +51,7 @@ export default function HomeClient() {
           <div className="flex-1 relative">
             <svg
               className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4"
-              style={{ color: '#5a3828' }}
+              style={{ color: 'var(--color-subtle)' }}
               fill="none" stroke="currentColor" viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -63,16 +63,16 @@ export default function HomeClient() {
               placeholder="Search by subject, topic, or keyword..."
               className="w-full pl-11 pr-10 py-3 rounded-xl transition-all duration-200 focus:outline-none text-sm"
               style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(180,90,40,0.2)',
-                color: '#E8D5C0',
+                background: 'var(--bg-input)',
+                border: '1px solid var(--border-input)',
+                color: 'var(--color-text)',
               }}
               onFocus={e => {
-                e.currentTarget.style.borderColor = 'rgba(193,127,58,0.55)';
+                e.currentTarget.style.borderColor = 'var(--border-input-focus)';
                 e.currentTarget.style.boxShadow = '0 0 0 3px rgba(193,127,58,0.1)';
               }}
               onBlur={e => {
-                e.currentTarget.style.borderColor = 'rgba(180,90,40,0.2)';
+                e.currentTarget.style.borderColor = 'var(--border-input)';
                 e.currentTarget.style.boxShadow = 'none';
               }}
             />
@@ -81,7 +81,7 @@ export default function HomeClient() {
                 type="button"
                 onClick={handleClear}
                 className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors"
-                style={{ color: '#5a3828' }}
+                style={{ color: 'var(--color-subtle)' }}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -112,7 +112,7 @@ export default function HomeClient() {
             </div>
           ) : results && results.length > 0 ? (
             <div>
-              <p className="text-sm mb-4" style={{ color: '#5a3828' }}>
+              <p className="text-sm mb-4" style={{ color: 'var(--color-subtle)' }}>
                 Found {results.length} result{results.length !== 1 ? 's' : ''} for &ldquo;{query}&rdquo;
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -133,13 +133,13 @@ export default function HomeClient() {
             </div>
           ) : (
             <div className="card p-10 text-center">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'rgba(193,127,58,0.1)' }}>
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--bg-badge)' }}>
                 <svg className="w-7 h-7" style={{ color: '#C17F3A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>No resources found</h3>
-              <p className="mb-6 text-sm" style={{ color: '#9A7A62' }}>
+              <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>No resources found</h3>
+              <p className="mb-6 text-sm" style={{ color: 'var(--color-muted)' }}>
                 No results for &ldquo;{query}&rdquo;. Be the first to request these resources!
               </p>
               <Link href="/request" className="btn-primary">

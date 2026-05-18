@@ -11,19 +11,19 @@ const TYPES = ['Link', 'Video', 'PDF', 'Article', 'Course', 'Book', 'Other'];
 
 const inputStyle: React.CSSProperties = {
   width: '100%', padding: '11px 14px', borderRadius: '10px', fontSize: '0.875rem',
-  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(180,90,40,0.18)',
-  color: '#E8D5C0', outline: 'none', transition: 'all 0.15s',
+  background: 'var(--bg-input)', border: '1px solid var(--border-input)',
+  color: 'var(--color-text)', outline: 'none', transition: 'all 0.15s',
 };
 
 const chipBase: React.CSSProperties = {
   padding: '6px 14px', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 500,
-  cursor: 'pointer', transition: 'all 0.15s', border: '1px solid rgba(180,90,40,0.2)',
-  background: 'rgba(255,255,255,0.03)', color: '#9A7A62',
+  cursor: 'pointer', transition: 'all 0.15s', border: '1px solid var(--border-card)',
+  background: 'var(--bg-card)', color: 'var(--color-muted)',
 };
 
 const chipSelected: React.CSSProperties = {
   ...chipBase,
-  background: 'rgba(193,127,58,0.15)', color: '#C8956A', border: '1px solid rgba(193,127,58,0.4)',
+  background: 'rgba(193,127,58,0.15)', color: 'var(--color-heading)', border: '1px solid rgba(193,127,58,0.4)',
 };
 
 interface LinkMeta {
@@ -100,7 +100,7 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
 
   if (!isSignedIn) {
     return (
-      <div className="rounded-xl p-4 text-center text-xs" style={{ background: 'rgba(255,255,255,0.02)', border: '1px dashed rgba(180,90,40,0.2)', color: '#5a3828' }}>
+      <div className="rounded-xl p-4 text-center text-xs" style={{ background: 'var(--bg-card)', border: '1px dashed var(--border-card)', color: 'var(--color-subtle)' }}>
         Sign in to share a resource
       </div>
     );
@@ -111,9 +111,9 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
       <button
         onClick={() => setStep('link')}
         className="w-full rounded-xl p-3 text-sm font-medium transition-all duration-150 flex items-center justify-center gap-2"
-        style={{ background: 'rgba(193,127,58,0.08)', border: '1px solid rgba(193,127,58,0.22)', color: '#C8956A' }}
+        style={{ background: 'var(--bg-badge)', border: '1px solid rgba(193,127,58,0.22)', color: 'var(--color-heading)' }}
         onMouseEnter={e => { e.currentTarget.style.background = 'rgba(193,127,58,0.15)'; }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(193,127,58,0.08)'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-badge)'; }}
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -130,14 +130,14 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
           <div
             className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold"
             style={{
-              background: i < current ? 'rgba(16,185,129,0.15)' : i === current ? 'rgba(193,127,58,0.2)' : 'rgba(255,255,255,0.05)',
-              color: i < current ? '#6ee7b7' : i === current ? '#C8956A' : '#5a3828',
-              border: `1px solid ${i < current ? 'rgba(16,185,129,0.3)' : i === current ? 'rgba(193,127,58,0.4)' : 'rgba(180,90,40,0.12)'}`,
+              background: i < current ? 'rgba(16,185,129,0.15)' : i === current ? 'rgba(193,127,58,0.2)' : 'var(--bg-input)',
+              color: i < current ? '#6ee7b7' : i === current ? 'var(--color-heading)' : 'var(--color-subtle)',
+              border: `1px solid ${i < current ? 'rgba(16,185,129,0.3)' : i === current ? 'rgba(193,127,58,0.4)' : 'var(--border-subtle)'}`,
             }}
           >
             {i < current ? '✓' : i + 1}
           </div>
-          {i < 4 && <div className="w-4 h-px" style={{ background: i < current ? 'rgba(16,185,129,0.3)' : 'rgba(180,90,40,0.12)' }} />}
+          {i < 4 && <div className="w-4 h-px" style={{ background: i < current ? 'rgba(16,185,129,0.3)' : 'var(--border-subtle)' }} />}
         </div>
       ))}
     </div>
@@ -146,10 +146,10 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
   const stepIndex = { link: 0, language: 1, price: 2, type: 3, comment: 4, posting: 4 }[step] ?? 0;
 
   return (
-    <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(180,90,40,0.18)' }}>
+    <div className="rounded-xl p-4" style={{ background: 'var(--bg-answer)', border: '1px solid var(--border-card)' }}>
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold" style={{ color: '#C8956A', fontFamily: 'Syne, sans-serif' }}>Share a Resource</h3>
-        <button onClick={reset} className="text-xs transition-colors" style={{ color: '#5a3828' }} onMouseEnter={e => e.currentTarget.style.color = '#9A7A62'} onMouseLeave={e => e.currentTarget.style.color = '#5a3828'}>
+        <h3 className="text-sm font-semibold" style={{ color: 'var(--color-heading)', fontFamily: 'Syne, sans-serif' }}>Share a Resource</h3>
+        <button onClick={reset} className="text-xs transition-colors" style={{ color: 'var(--color-subtle)' }} onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-muted)')} onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-subtle)')}>
           Cancel
         </button>
       </div>
@@ -165,7 +165,7 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
       {/* Step 1: Link */}
       {step === 'link' && (
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: '#9A7A62' }}>Resource URL *</label>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--color-muted)' }}>Resource URL *</label>
           <input
             type="url"
             value={url}
@@ -189,9 +189,9 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
 
       {/* Link Preview (shown after URL step) */}
       {step !== 'link' && (fetchingMeta || linkMeta) && (
-        <div className="mb-3 rounded-lg overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(180,90,40,0.12)' }}>
+        <div className="mb-3 rounded-lg overflow-hidden" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
           {fetchingMeta ? (
-            <div className="flex items-center gap-2 p-3 text-xs" style={{ color: '#9A7A62' }}>
+            <div className="flex items-center gap-2 p-3 text-xs" style={{ color: 'var(--color-muted)' }}>
               <svg className="animate-spin w-3 h-3" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
               Fetching link preview...
             </div>
@@ -207,12 +207,12 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
               )}
               <div className="min-w-0 flex-1">
                 {linkMeta.title && (
-                  <p className="text-xs font-medium truncate" style={{ color: '#E8D5C0' }}>{linkMeta.title}</p>
+                  <p className="text-xs font-medium truncate" style={{ color: 'var(--color-text)' }}>{linkMeta.title}</p>
                 )}
                 {linkMeta.description && (
-                  <p className="text-xs mt-0.5 line-clamp-2" style={{ color: '#9A7A62' }}>{linkMeta.description}</p>
+                  <p className="text-xs mt-0.5 line-clamp-2" style={{ color: 'var(--color-muted)' }}>{linkMeta.description}</p>
                 )}
-                <p className="text-xs mt-1 truncate" style={{ color: '#5a3828' }}>{url}</p>
+                <p className="text-xs mt-1 truncate" style={{ color: 'var(--color-subtle)' }}>{url}</p>
               </div>
             </div>
           )}
@@ -222,22 +222,22 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
       {/* Step 2: Language */}
       {step === 'language' && (
         <div>
-          <label className="block text-xs font-medium mb-2" style={{ color: '#9A7A62' }}>Language *</label>
+          <label className="block text-xs font-medium mb-2" style={{ color: 'var(--color-muted)' }}>Language *</label>
           <div className="flex flex-wrap gap-2">
             {LANGUAGES.map(lang => (
               <button
                 key={lang}
                 onClick={() => { setLanguage(lang); setStep('price'); }}
                 style={language === lang ? chipSelected : chipBase}
-                onMouseEnter={e => { if (language !== lang) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
-                onMouseLeave={e => { if (language !== lang) e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+                onMouseEnter={e => { if (language !== lang) e.currentTarget.style.background = 'var(--bg-badge)'; }}
+                onMouseLeave={e => { if (language !== lang) e.currentTarget.style.background = 'var(--bg-card)'; }}
               >
                 {lang}
               </button>
             ))}
           </div>
           <div className="flex justify-between mt-3">
-            <button onClick={() => setStep('link')} className="text-xs" style={{ color: '#9A7A62' }}>← Back</button>
+            <button onClick={() => setStep('link')} className="text-xs" style={{ color: 'var(--color-muted)' }}>← Back</button>
           </div>
         </div>
       )}
@@ -245,22 +245,22 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
       {/* Step 3: Price */}
       {step === 'price' && (
         <div>
-          <label className="block text-xs font-medium mb-2" style={{ color: '#9A7A62' }}>Price *</label>
+          <label className="block text-xs font-medium mb-2" style={{ color: 'var(--color-muted)' }}>Price *</label>
           <div className="flex flex-wrap gap-2">
             {PRICES.map(p => (
               <button
                 key={p}
                 onClick={() => { setPrice(p); setStep('type'); }}
                 style={price === p ? chipSelected : chipBase}
-                onMouseEnter={e => { if (price !== p) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
-                onMouseLeave={e => { if (price !== p) e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+                onMouseEnter={e => { if (price !== p) e.currentTarget.style.background = 'var(--bg-badge)'; }}
+                onMouseLeave={e => { if (price !== p) e.currentTarget.style.background = 'var(--bg-card)'; }}
               >
                 {p}
               </button>
             ))}
           </div>
           <div className="flex justify-between mt-3">
-            <button onClick={() => setStep('language')} className="text-xs" style={{ color: '#9A7A62' }}>← Back</button>
+            <button onClick={() => setStep('language')} className="text-xs" style={{ color: 'var(--color-muted)' }}>← Back</button>
           </div>
         </div>
       )}
@@ -268,22 +268,22 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
       {/* Step 4: Type */}
       {step === 'type' && (
         <div>
-          <label className="block text-xs font-medium mb-2" style={{ color: '#9A7A62' }}>Resource Type</label>
+          <label className="block text-xs font-medium mb-2" style={{ color: 'var(--color-muted)' }}>Resource Type</label>
           <div className="flex flex-wrap gap-2">
             {TYPES.map(t => (
               <button
                 key={t}
                 onClick={() => setType(t)}
                 style={type === t ? chipSelected : chipBase}
-                onMouseEnter={e => { if (type !== t) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
-                onMouseLeave={e => { if (type !== t) e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+                onMouseEnter={e => { if (type !== t) e.currentTarget.style.background = 'var(--bg-badge)'; }}
+                onMouseLeave={e => { if (type !== t) e.currentTarget.style.background = 'var(--bg-card)'; }}
               >
                 {t}
               </button>
             ))}
           </div>
           <div className="flex justify-between mt-3">
-            <button onClick={() => setStep('price')} className="text-xs" style={{ color: '#9A7A62' }}>← Back</button>
+            <button onClick={() => setStep('price')} className="text-xs" style={{ color: 'var(--color-muted)' }}>← Back</button>
             <button onClick={() => setStep('comment')} className="btn-primary text-xs px-4 py-2">Next →</button>
           </div>
         </div>
@@ -292,7 +292,7 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
       {/* Step 5: Comment */}
       {(step === 'comment' || step === 'posting') && (
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: '#9A7A62' }}>Comment (optional)</label>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--color-muted)' }}>Comment (optional)</label>
           <textarea
             value={comment}
             onChange={e => setComment(e.target.value)}
@@ -302,19 +302,19 @@ export default function AddAnswerForm({ postId, onResourceAdded }: { postId: str
           />
 
           {/* Preview */}
-          <div className="mt-3 p-3 rounded-lg text-xs space-y-1" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(180,90,40,0.1)' }}>
-            <p style={{ color: '#5a3828' }}>Preview:</p>
+          <div className="mt-3 p-3 rounded-lg text-xs space-y-1" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+            <p style={{ color: 'var(--color-subtle)' }}>Preview:</p>
             <div className="flex flex-wrap gap-1.5">
               <span className="px-2 py-0.5 rounded-full" style={{ background: 'rgba(99,102,241,0.1)', color: '#a5b4fc', border: '1px solid rgba(99,102,241,0.2)' }}>{language}</span>
               <span className="px-2 py-0.5 rounded-full" style={{ background: price === 'Free' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: price === 'Free' ? '#6ee7b7' : '#fca5a5', border: `1px solid ${price === 'Free' ? 'rgba(16,185,129,0.25)' : 'rgba(239,68,68,0.25)'}` }}>{price}</span>
-              {type !== 'Link' && <span className="px-2 py-0.5 rounded-full" style={{ background: 'rgba(193,127,58,0.1)', color: '#C8956A', border: '1px solid rgba(193,127,58,0.2)' }}>{type}</span>}
+              {type !== 'Link' && <span className="px-2 py-0.5 rounded-full" style={{ background: 'rgba(193,127,58,0.1)', color: 'var(--color-heading)', border: '1px solid rgba(193,127,58,0.2)' }}>{type}</span>}
             </div>
             <p className="break-all" style={{ color: '#818cf8' }}>{url}</p>
-            {comment && <p style={{ color: '#9A7A62' }}>{comment}</p>}
+            {comment && <p style={{ color: 'var(--color-muted)' }}>{comment}</p>}
           </div>
 
           <div className="flex justify-between mt-3">
-            <button onClick={() => setStep('type')} className="text-xs" style={{ color: '#9A7A62' }}>← Back</button>
+            <button onClick={() => setStep('type')} className="text-xs" style={{ color: 'var(--color-muted)' }}>← Back</button>
             <button
               onClick={handlePost}
               disabled={step === 'posting'}

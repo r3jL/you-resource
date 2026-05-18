@@ -26,10 +26,10 @@ export default async function PostsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>
+          <h1 className="text-3xl font-bold" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
             Browse Resources
           </h1>
-          <p className="mt-1 text-sm" style={{ color: '#5a3828' }}>
+          <p className="mt-1 text-sm" style={{ color: 'var(--color-subtle)' }}>
             {posts.length} resource request{posts.length !== 1 ? 's' : ''} from the community
           </p>
         </div>

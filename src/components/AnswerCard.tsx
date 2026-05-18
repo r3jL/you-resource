@@ -52,7 +52,7 @@ export default function AnswerCard({ resource }: AnswerProps) {
   return (
     <div
       className="flex gap-3 rounded-xl p-4"
-      style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(180,90,40,0.15)' }}
+      style={{ background: 'var(--bg-answer)', border: '1px solid var(--border-card)' }}
     >
       {/* Vote column */}
       <div className="flex flex-col items-center gap-0.5 shrink-0 pt-1">
@@ -60,15 +60,15 @@ export default function AnswerCard({ resource }: AnswerProps) {
           onClick={() => handleVote('up')}
           disabled={voting || !isSignedIn}
           className="p-1 rounded-lg transition-colors duration-150 disabled:opacity-30"
-          style={{ color: userVote === 'up' ? '#10b981' : '#5a3828' }}
+          style={{ color: userVote === 'up' ? '#10b981' : 'var(--color-subtle)' }}
           onMouseEnter={e => { if (isSignedIn) e.currentTarget.style.color = '#10b981'; }}
-          onMouseLeave={e => { if (userVote !== 'up') e.currentTarget.style.color = '#5a3828'; }}
+          onMouseLeave={e => { if (userVote !== 'up') e.currentTarget.style.color = 'var(--color-subtle)'; }}
         >
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 4l8 8H4l8-8z" /></svg>
         </button>
         <span
           className="text-sm font-bold tabular-nums w-6 text-center"
-          style={{ color: votes > 0 ? '#10b981' : votes < 0 ? '#ef4444' : '#5a3828' }}
+          style={{ color: votes > 0 ? '#10b981' : votes < 0 ? '#ef4444' : 'var(--color-subtle)' }}
         >
           {votes}
         </span>
@@ -76,9 +76,9 @@ export default function AnswerCard({ resource }: AnswerProps) {
           onClick={() => handleVote('down')}
           disabled={voting || !isSignedIn}
           className="p-1 rounded-lg transition-colors duration-150 disabled:opacity-30"
-          style={{ color: userVote === 'down' ? '#ef4444' : '#5a3828' }}
+          style={{ color: userVote === 'down' ? '#ef4444' : 'var(--color-subtle)' }}
           onMouseEnter={e => { if (isSignedIn) e.currentTarget.style.color = '#ef4444'; }}
-          onMouseLeave={e => { if (userVote !== 'down') e.currentTarget.style.color = '#5a3828'; }}
+          onMouseLeave={e => { if (userVote !== 'down') e.currentTarget.style.color = 'var(--color-subtle)'; }}
         >
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 20l-8-8h16l-8 8z" /></svg>
         </button>
@@ -95,7 +95,7 @@ export default function AnswerCard({ resource }: AnswerProps) {
             {resource.price}
           </span>
           {resource.type && resource.type !== 'Link' && (
-            <span className="px-2 py-0.5 rounded-full text-xs font-medium" style={{ background: 'rgba(193,127,58,0.1)', color: '#C8956A', border: '1px solid rgba(193,127,58,0.2)' }}>
+            <span className="px-2 py-0.5 rounded-full text-xs font-medium" style={{ background: 'rgba(193,127,58,0.1)', color: 'var(--color-heading)', border: '1px solid rgba(193,127,58,0.2)' }}>
               {resource.type}
             </span>
           )}
@@ -116,11 +116,11 @@ export default function AnswerCard({ resource }: AnswerProps) {
 
         {/* Comment */}
         {resource.description && (
-          <p className="text-xs mt-1.5" style={{ color: '#9A7A62' }}>{resource.description}</p>
+          <p className="text-xs mt-1.5" style={{ color: 'var(--color-muted)' }}>{resource.description}</p>
         )}
 
         {/* Meta */}
-        <p className="text-xs mt-2" style={{ color: '#5a3828' }}>
+        <p className="text-xs mt-2" style={{ color: 'var(--color-subtle)' }}>
           by {resource.submittedBy} &middot; {new Date(resource.createdAt).toLocaleDateString()}
         </p>
       </div>

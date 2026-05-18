@@ -33,7 +33,7 @@ export default function PostCard({
           >
             {subject}
           </span>
-          <div className="flex items-center gap-1 text-xs shrink-0" style={{ color: '#5a3828' }}>
+          <div className="flex items-center gap-1 text-xs shrink-0" style={{ color: 'var(--color-subtle)' }}>
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
             </svg>
@@ -43,12 +43,12 @@ export default function PostCard({
 
         <h3
           className="font-semibold mb-2 line-clamp-2 transition-colors duration-200"
-          style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}
+          style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}
         >
           {title}
         </h3>
 
-        <p className="text-sm mb-3 line-clamp-2" style={{ color: '#9A7A62' }}>{description}</p>
+        <p className="text-sm mb-3 line-clamp-2" style={{ color: 'var(--color-muted)' }}>{description}</p>
 
         {parsedTopics.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-3">
@@ -56,7 +56,7 @@ export default function PostCard({
               <span
                 key={topic}
                 className="inline-flex items-center px-2 py-0.5 rounded-lg text-xs"
-                style={{ background: 'rgba(193,127,58,0.08)', color: '#9A7A62', border: '1px solid rgba(180,90,40,0.15)' }}
+                style={{ background: 'var(--bg-badge)', color: 'var(--color-muted)', border: '1px solid var(--border-card)' }}
               >
                 {topic}
               </span>
@@ -64,7 +64,7 @@ export default function PostCard({
             {parsedTopics.length > 4 && (
               <span
                 className="inline-flex items-center px-2 py-0.5 rounded-lg text-xs"
-                style={{ background: 'rgba(255,255,255,0.04)', color: '#5a3828' }}
+                style={{ background: 'var(--bg-input)', color: 'var(--color-subtle)' }}
               >
                 +{parsedTopics.length - 4} more
               </span>
@@ -72,7 +72,7 @@ export default function PostCard({
           </div>
         )}
 
-        <div className="flex items-center justify-between text-xs" style={{ color: '#5a3828', borderTop: '1px solid rgba(180,90,40,0.1)', paddingTop: '10px', marginTop: '4px' }}>
+        <div className="flex items-center justify-between text-xs" style={{ color: 'var(--color-subtle)', borderTop: '1px solid var(--border-subtle)', paddingTop: '10px', marginTop: '4px' }}>
           <span>by {authorName}</span>
           <span>{formattedDate}</span>
         </div>

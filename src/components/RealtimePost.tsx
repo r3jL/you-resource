@@ -32,14 +32,14 @@ export default function RealtimePost({ postId, initialResources }: {
   return (
     <>
       <div className="mb-6">
-        <h2 className="text-lg font-bold mb-4" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>
-          Answers <span style={{ color: '#5a3828', fontSize: '0.875rem', fontWeight: 400 }}>({resources.length})</span>
+        <h2 className="text-lg font-bold mb-4" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
+          Answers <span style={{ color: 'var(--color-subtle)', fontSize: '0.875rem', fontWeight: 400 }}>({resources.length})</span>
         </h2>
 
         {resources.length === 0 ? (
-          <div className="rounded-2xl p-8 text-center mb-4" style={{ background: 'rgba(255,255,255,0.02)', border: '1px dashed rgba(180,90,40,0.25)' }}>
-            <p className="font-medium text-sm mb-1" style={{ color: '#9A7A62' }}>No answers yet</p>
-            <p className="text-xs" style={{ color: '#5a3828' }}>Be the first to share a resource for this request!</p>
+          <div className="rounded-2xl p-8 text-center mb-4" style={{ background: 'var(--bg-card)', border: '1px dashed var(--border-card)' }}>
+            <p className="font-medium text-sm mb-1" style={{ color: 'var(--color-muted)' }}>No answers yet</p>
+            <p className="text-xs" style={{ color: 'var(--color-subtle)' }}>Be the first to share a resource for this request!</p>
           </div>
         ) : (
           <div className="space-y-3 mb-4">

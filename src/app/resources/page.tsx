@@ -18,10 +18,10 @@ export default function ResourcesPage() {
           </svg>
           STUDY RESOURCES
         </div>
-        <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>
+        <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
           Learning Resources
         </h1>
-        <p style={{ color: '#9A7A62' }}>
+        <p style={{ color: 'var(--color-muted)' }}>
           Curated platforms and tools for quantitative finance, mathematics, and computer science.
         </p>
       </div>
@@ -36,20 +36,20 @@ export default function ResourcesPage() {
             rel="noopener noreferrer"
             className="group block rounded-2xl p-5 transition-all duration-200"
             style={{
-              background: 'rgba(255,255,255,0.025)',
-              border: '1px solid rgba(180,90,40,0.18)',
+              background: 'var(--bg-answer)',
+              border: '1px solid var(--border-card)',
             }}
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h3 className="font-semibold mb-1 truncate" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>
+                <h3 className="font-semibold mb-1 truncate" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
                   {item.title}
                 </h3>
-                <p className="text-sm" style={{ color: '#9A7A62' }}>{item.description}</p>
+                <p className="text-sm" style={{ color: 'var(--color-muted)' }}>{item.description}</p>
               </div>
               <svg
                 className="w-4 h-4 shrink-0 mt-0.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                style={{ color: '#5a3828' }}
+                style={{ color: 'var(--color-subtle)' }}
                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -57,7 +57,7 @@ export default function ResourcesPage() {
             </div>
             <div className="mt-3 flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#6366f1', opacity: 0.7 }} />
-              <span className="text-xs truncate" style={{ color: '#5a3828', fontFamily: 'JetBrains Mono, monospace' }}>
+              <span className="text-xs truncate" style={{ color: 'var(--color-subtle)', fontFamily: 'JetBrains Mono, monospace' }}>
                 {new URL(item.url).hostname.replace('www.', '')}
               </span>
             </div>
