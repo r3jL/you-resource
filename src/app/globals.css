@@ -2,15 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens ─────────────────────────────────────── */
+:root {
+  --bg-body:    #110703;
+  --bg-nav:     rgba(17,7,3,0.85);
+  --bg-sidebar: rgba(10,4,1,0.97);
+  --bg-card:    rgba(255,255,255,0.03);
+  --bg-answer:  rgba(255,255,255,0.025);
+  --bg-input:   rgba(255,255,255,0.04);
+  --bg-badge:   rgba(193,127,58,0.08);
+
+  --color-text:    #E8D5C0;
+  --color-heading: #C8956A;
+  --color-muted:   #9A7A62;
+  --color-subtle:  #5a3828;
+  --color-accent:  #C17F3A;
+
+  --border-card:        rgba(180,90,40,0.18);
+  --border-card-hover:  rgba(193,127,58,0.35);
+  --border-nav:         rgba(180,90,40,0.15);
+  --border-input:       rgba(180,90,40,0.18);
+  --border-input-focus: rgba(193,127,58,0.55);
+  --border-subtle:      rgba(180,90,40,0.12);
+
+  --shadow-nav:     0 4px 24px rgba(0,0,0,0.4);
+  --shadow-card:    0 4px 24px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.03) inset;
+  --shadow-sidebar: 4px 0 24px rgba(0,0,0,0.4);
+}
+
+[data-theme='light'] {
+  --bg-body:    #FDF7F0;
+  --bg-nav:     rgba(253,247,240,0.92);
+  --bg-sidebar: rgba(252,245,235,0.99);
+  --bg-card:    rgba(193,127,58,0.05);
+  --bg-answer:  rgba(193,127,58,0.04);
+  --bg-input:   rgba(0,0,0,0.04);
+  --bg-badge:   rgba(193,127,58,0.12);
+
+  --color-text:    #1A0A04;
+  --color-heading: #8B4513;
+  --color-muted:   #7A5540;
+  --color-subtle:  #A07850;
+  --color-accent:  #C17F3A;
+
+  --border-card:        rgba(180,90,40,0.25);
+  --border-card-hover:  rgba(193,127,58,0.45);
+  --border-nav:         rgba(180,90,40,0.2);
+  --border-input:       rgba(180,90,40,0.3);
+  --border-input-focus: rgba(193,127,58,0.65);
+  --border-subtle:      rgba(180,90,40,0.2);
+
+  --shadow-nav:     0 4px 24px rgba(0,0,0,0.1);
+  --shadow-card:    0 4px 16px rgba(0,0,0,0.08), 0 0 0 1px rgba(193,127,58,0.06) inset;
+  --shadow-sidebar: 4px 0 16px rgba(0,0,0,0.1);
+}
+
+/* ── Base ─────────────────────────────────────────────── */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    background-color: #110703;
-    color: #E8D5C0;
+    background-color: var(--bg-body);
+    color: var(--color-text);
     font-family: var(--font-dm-sans), 'DM Sans', 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
 
@@ -40,21 +97,20 @@
 
   .btn-secondary {
     @apply inline-flex items-center justify-center px-4 py-2 font-semibold rounded-xl transition-all duration-200 focus:outline-none;
-    background: rgba(255,255,255,0.05);
-    color: #C8956A;
-    border: 1px solid rgba(180,90,40,0.28);
+    background: var(--bg-badge);
+    color: var(--color-heading);
+    border: 1px solid var(--border-card);
   }
   .btn-secondary:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(193,127,58,0.5);
+    border-color: var(--border-card-hover);
   }
 
   .glass-card {
-    background: rgba(255,255,255,0.03);
+    background: var(--bg-card);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(180,90,40,0.18);
-    box-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.03) inset;
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-card);
     border-radius: 14px;
   }
 
@@ -62,27 +118,27 @@
     @apply glass-card transition-all duration-200;
   }
   .card:hover {
-    border-color: rgba(193,127,58,0.35);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04) inset;
+    border-color: var(--border-card-hover);
+    box-shadow: var(--shadow-card);
   }
 
   .input-field {
     @apply w-full px-3 py-2.5 rounded-xl transition-all duration-200 focus:outline-none;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(180,90,40,0.18);
-    color: #E8D5C0;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--color-text);
   }
   .input-field::placeholder {
-    color: #5a3828;
+    color: var(--color-subtle);
   }
   .input-field:focus {
-    border-color: rgba(193,127,58,0.55);
+    border-color: var(--border-input-focus);
     box-shadow: 0 0 0 3px rgba(193,127,58,0.1);
-    background: rgba(255,255,255,0.055);
+    background: var(--bg-input);
   }
 
   .label {
     @apply block text-sm font-medium mb-1.5;
-    color: #9A7A62;
+    color: var(--color-muted);
   }
 }

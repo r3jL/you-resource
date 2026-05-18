@@ -31,12 +31,12 @@ export default function LeftSidebar() {
         height: 'calc(100vh - 60px)',
         width: expanded ? `${EXPANDED}px` : `${COLLAPSED}px`,
         transition: 'width 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
-        background: 'rgba(10,4,1,0.97)',
-        borderRight: '1px solid rgba(180,90,40,0.15)',
+        background: 'var(--bg-sidebar)',
+        borderRight: '1px solid var(--border-nav)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         overflow: 'hidden',
-        boxShadow: expanded ? '4px 0 24px rgba(0,0,0,0.4)' : 'none',
+        boxShadow: expanded ? 'var(--shadow-sidebar)' : 'none',
       }}
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
@@ -50,9 +50,9 @@ export default function LeftSidebar() {
               key={item.href}
               href={item.href}
               className="flex items-center gap-3 px-2.5 py-2.5 rounded-xl transition-colors duration-150"
-              style={active ? { background: 'rgba(193,127,58,0.15)', color: '#C8956A' } : { color: '#9A7A62' }}
-              onMouseEnter={e => { if (!active) { e.currentTarget.style.background = 'rgba(193,127,58,0.07)'; e.currentTarget.style.color = '#C8956A'; } }}
-              onMouseLeave={e => { if (!active) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#9A7A62'; } }}
+              style={active ? { background: 'rgba(193,127,58,0.15)', color: 'var(--color-heading)' } : { color: 'var(--color-muted)' }}
+              onMouseEnter={e => { if (!active) { e.currentTarget.style.background = 'rgba(193,127,58,0.07)'; e.currentTarget.style.color = 'var(--color-heading)'; } }}
+              onMouseLeave={e => { if (!active) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-muted)'; } }}
             >
               <span className="flex items-center justify-center shrink-0" style={{ width: '20px' }}>
                 <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -68,13 +68,13 @@ export default function LeftSidebar() {
         })}
       </nav>
 
-      <div className="px-2 py-3 flex items-center gap-3" style={{ borderTop: '1px solid rgba(180,90,40,0.13)' }}>
+      <div className="px-2 py-3 flex items-center gap-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold uppercase shrink-0"
           style={{
-            background: isSignedIn ? 'rgba(193,127,58,0.18)' : 'rgba(90,56,40,0.15)',
-            color: isSignedIn ? '#C8956A' : '#5a3828',
-            border: `1px solid ${isSignedIn ? 'rgba(193,127,58,0.28)' : 'rgba(90,56,40,0.2)'}`,
+            background: isSignedIn ? 'rgba(193,127,58,0.18)' : 'var(--bg-badge)',
+            color: isSignedIn ? 'var(--color-heading)' : 'var(--color-subtle)',
+            border: `1px solid ${isSignedIn ? 'rgba(193,127,58,0.28)' : 'var(--border-card)'}`,
             minWidth: '32px',
           }}
         >
@@ -87,11 +87,11 @@ export default function LeftSidebar() {
         <div style={{ opacity: expanded ? 1 : 0, transform: expanded ? 'translateX(0)' : 'translateX(-4px)', transition: 'opacity 0.18s ease, transform 0.18s ease', transitionDelay: expanded ? '0.06s' : '0s', overflow: 'hidden', minWidth: 0 }}>
           {isSignedIn ? (
             <>
-              <p className="text-sm font-semibold leading-tight truncate" style={{ color: '#C8956A', maxWidth: `${EXPANDED - COLLAPSED - 20}px` }}>{displayName}</p>
-              <p className="text-xs leading-tight truncate mt-0.5" style={{ color: '#5a3828', maxWidth: `${EXPANDED - COLLAPSED - 20}px` }}>{email}</p>
+              <p className="text-sm font-semibold leading-tight truncate" style={{ color: 'var(--color-heading)', maxWidth: `${EXPANDED - COLLAPSED - 20}px` }}>{displayName}</p>
+              <p className="text-xs leading-tight truncate mt-0.5" style={{ color: 'var(--color-subtle)', maxWidth: `${EXPANDED - COLLAPSED - 20}px` }}>{email}</p>
             </>
           ) : (
-            <p className="text-xs" style={{ color: '#5a3828' }}>Not signed in</p>
+            <p className="text-xs" style={{ color: 'var(--color-subtle)' }}>Not signed in</p>
           )}
         </div>
       </div>

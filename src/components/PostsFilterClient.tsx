@@ -23,7 +23,7 @@ export default function PostsFilterClient({ posts, subjects }: { posts: Post[]; 
           className="px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-150"
           style={selectedSubject === null
             ? { background: 'linear-gradient(135deg, #D4923F, #C17F3A)', color: '#fff', border: '1px solid transparent', boxShadow: '0 2px 12px rgba(193,127,58,0.35)' }
-            : { background: 'rgba(255,255,255,0.04)', color: '#9A7A62', border: '1px solid rgba(180,90,40,0.2)' }
+            : { background: 'var(--bg-input)', color: 'var(--color-muted)', border: '1px solid var(--border-input)' }
           }
         >
           All ({posts.length})
@@ -39,7 +39,7 @@ export default function PostsFilterClient({ posts, subjects }: { posts: Post[]; 
               className="px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-150"
               style={isActive
                 ? { ...colors.style, boxShadow: `0 0 0 2px ${colors.style.color}40` }
-                : { background: 'rgba(255,255,255,0.03)', color: '#9A7A62', border: '1px solid rgba(180,90,40,0.18)' }
+                : { background: 'var(--bg-card)', color: 'var(--color-muted)', border: '1px solid var(--border-card)' }
               }
             >
               {subject} ({count})
@@ -49,7 +49,7 @@ export default function PostsFilterClient({ posts, subjects }: { posts: Post[]; 
       </div>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-16" style={{ color: '#5a3828' }}>
+        <div className="text-center py-16" style={{ color: 'var(--color-subtle)' }}>
           <p className="text-lg">No posts found for this subject.</p>
         </div>
       ) : (

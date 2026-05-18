@@ -19,8 +19,8 @@ const SUBJECT_OPTIONS = [
 
 const inputStyle: React.CSSProperties = {
   width: '100%', padding: '11px 14px', borderRadius: '10px', fontSize: '0.875rem',
-  background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(180,90,40,0.18)',
-  color: '#E8D5C0', outline: 'none', transition: 'all 0.15s',
+  background: 'var(--bg-input)', border: '1px solid var(--border-input)',
+  color: 'var(--color-text)', outline: 'none', transition: 'all 0.15s',
 };
 
 interface SimilarPost {
@@ -183,27 +183,27 @@ export default function RequestForm() {
   // Step 1: Form
   if (step === 'form' || step === 'classifying') {
     return (
-      <form onSubmit={handleClassify} className="rounded-2xl p-6 space-y-5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(180,90,40,0.18)', backdropFilter: 'blur(12px)' }}>
+      <form onSubmit={handleClassify} className="rounded-2xl p-6 space-y-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)', backdropFilter: 'blur(12px)' }}>
         {isSignedIn && user && (
-          <div className="flex items-center gap-2 text-xs" style={{ color: '#9A7A62' }}>
+          <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-muted)' }}>
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            Posting as <span style={{ color: '#C8956A' }}>{user.username || user.firstName || 'User'}</span>
+            Posting as <span style={{ color: 'var(--color-heading)' }}>{user.username || user.firstName || 'User'}</span>
           </div>
         )}
 
         {error && <div className="p-3 rounded-xl text-xs" style={{ background: 'rgba(239,68,68,0.1)', color: '#fca5a5', border: '1px solid rgba(239,68,68,0.2)' }}>{error}</div>}
 
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: '#9A7A62' }}>Request Title *</label>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--color-muted)' }}>Request Title *</label>
           <input name="title" type="text" value={form.title} onChange={handleChange} placeholder="e.g., Best resources to learn Calculus from scratch" required style={inputStyle} onFocus={focusStyle} onBlur={blurStyle} />
         </div>
 
         <div>
-          <label className="block text-xs font-medium mb-1.5" style={{ color: '#9A7A62' }}>Description *</label>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: 'var(--color-muted)' }}>Description *</label>
           <textarea name="description" value={form.description} onChange={handleChange} placeholder="Describe what you're looking for in detail. Include your current level, what specific topics you need help with, and what format you prefer..." required rows={6} style={{ ...inputStyle, resize: 'none' }} onFocus={focusStyle} onBlur={blurStyle} />
-          <p className="text-xs mt-1.5" style={{ color: '#5a3828' }}>The more detail you provide, the better our AI can classify your request.</p>
+          <p className="text-xs mt-1.5" style={{ color: 'var(--color-subtle)' }}>The more detail you provide, the better our AI can classify your request.</p>
         </div>
 
         <button type="submit" disabled={step === 'classifying'} className="btn-primary w-full py-3">
@@ -226,7 +226,7 @@ export default function RequestForm() {
   if (step === 'tags') {
     return (
       <div className="space-y-4">
-        <div className="rounded-2xl p-6" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(180,90,40,0.18)', backdropFilter: 'blur(12px)' }}>
+        <div className="rounded-2xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)', backdropFilter: 'blur(12px)' }}>
           <div className="flex items-start gap-3 mb-5">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'linear-gradient(135deg, #D4923F, #C17F3A)', boxShadow: '0 4px 16px rgba(193,127,58,0.35)' }}>
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,15 +234,15 @@ export default function RequestForm() {
               </svg>
             </div>
             <div>
-              <h3 className="font-bold" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>AI Classification Result</h3>
-              <p className="text-xs mt-0.5" style={{ color: '#9A7A62' }}>Select the tags that apply to your request (max 5)</p>
+              <h3 className="font-bold" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>AI Classification Result</h3>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--color-muted)' }}>Select the tags that apply to your request (max 5)</p>
             </div>
           </div>
 
           {/* Subject Selection */}
           <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#5a3828' }}>
-              Subject <span className="normal-case font-normal">— AI suggested: <span style={{ color: '#C8956A' }}>{classified?.subject}</span></span>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--color-subtle)' }}>
+              Subject <span className="normal-case font-normal">— AI suggested: <span style={{ color: 'var(--color-heading)' }}>{classified?.subject}</span></span>
             </p>
             <div className="flex flex-wrap gap-2">
               {/* Ensure AI subject is first if not in the list */}
@@ -256,7 +256,7 @@ export default function RequestForm() {
                     className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150"
                     style={isSelected
                       ? subjColors.style
-                      : { background: 'rgba(255,255,255,0.03)', color: '#5a3828', border: '1px solid rgba(180,90,40,0.15)' }
+                      : { background: 'var(--bg-card)', color: 'var(--color-subtle)', border: '1px solid var(--border-card)' }
                     }
                   >
                     {isSelected && <span className="mr-1">✓</span>}
@@ -269,7 +269,7 @@ export default function RequestForm() {
 
           {/* Selectable Topics */}
           <div className="mb-4">
-            <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#5a3828' }}>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--color-subtle)' }}>
               Topics <span className="normal-case font-normal">— tap to toggle ({selectedTopics.length}/5 selected)</span>
             </p>
             <div className="flex flex-wrap gap-2">
@@ -296,9 +296,9 @@ export default function RequestForm() {
 
           {/* Request Preview */}
           <div className="pt-3" style={{ borderTop: '1px solid rgba(180,90,40,0.12)' }}>
-            <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#5a3828' }}>Your Request</p>
-            <p className="text-sm font-semibold mb-1" style={{ color: '#C8956A', fontFamily: 'Syne, sans-serif' }}>{form.title}</p>
-            <p className="text-xs line-clamp-3" style={{ color: '#9A7A62' }}>{form.description}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--color-subtle)' }}>Your Request</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: 'var(--color-heading)', fontFamily: 'Syne, sans-serif' }}>{form.title}</p>
+            <p className="text-xs line-clamp-3" style={{ color: 'var(--color-muted)' }}>{form.description}</p>
           </div>
         </div>
 
@@ -330,11 +330,11 @@ export default function RequestForm() {
       <div className="space-y-4">
         {/* Similar posts section */}
         {similarPosts.length > 0 && (
-          <div className="rounded-2xl p-6" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(180,90,40,0.18)', backdropFilter: 'blur(12px)' }}>
-            <h3 className="font-bold mb-1" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>
+          <div className="rounded-2xl p-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)', backdropFilter: 'blur(12px)' }}>
+            <h3 className="font-bold mb-1" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
               Similar Existing Requests
             </h3>
-            <p className="text-xs mb-4" style={{ color: '#9A7A62' }}>
+            <p className="text-xs mb-4" style={{ color: 'var(--color-muted)' }}>
               Check if someone already asked for what you need. Your draft is saved.
             </p>
             <div className="space-y-3 max-h-96 overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(193,127,58,0.3) transparent' }}>
@@ -349,27 +349,27 @@ export default function RequestForm() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block group rounded-2xl p-5 transition-all duration-200"
-                    style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(180,90,40,0.18)' }}
+                    style={{ background: 'var(--bg-answer)', border: '1px solid var(--border-card)' }}
                   >
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold" style={postColors.style}>
                         {post.subject}
                       </span>
-                      <div className="flex items-center gap-1 text-xs shrink-0" style={{ color: '#5a3828' }}>
+                      <div className="flex items-center gap-1 text-xs shrink-0" style={{ color: 'var(--color-subtle)' }}>
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                         <span>{post.resources?.[0]?.count ?? 0} resources</span>
                       </div>
                     </div>
-                    <h3 className="font-semibold mb-1 line-clamp-2" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>{post.title}</h3>
-                    <p className="text-sm mb-2 line-clamp-2" style={{ color: '#9A7A62' }}>{post.description}</p>
+                    <h3 className="font-semibold mb-1 line-clamp-2" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>{post.title}</h3>
+                    <p className="text-sm mb-2 line-clamp-2" style={{ color: 'var(--color-muted)' }}>{post.description}</p>
                     {postTopics.length > 0 && (
                       <div className="flex flex-wrap gap-1.5">
                         {postTopics.slice(0, 3).map(t => (
-                          <span key={t} className="px-2 py-0.5 rounded-lg text-xs" style={{ background: 'rgba(193,127,58,0.08)', color: '#9A7A62', border: '1px solid rgba(180,90,40,0.15)' }}>{t}</span>
+                          <span key={t} className="px-2 py-0.5 rounded-lg text-xs" style={{ background: 'rgba(193,127,58,0.08)', color: 'var(--color-muted)', border: '1px solid var(--border-card)' }}>{t}</span>
                         ))}
-                        {postTopics.length > 3 && <span className="px-2 py-0.5 rounded-lg text-xs" style={{ background: 'rgba(255,255,255,0.04)', color: '#5a3828' }}>+{postTopics.length - 3}</span>}
+                        {postTopics.length > 3 && <span className="px-2 py-0.5 rounded-lg text-xs" style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--color-subtle)' }}>+{postTopics.length - 3}</span>}
                       </div>
                     )}
                   </a>
@@ -380,19 +380,19 @@ export default function RequestForm() {
         )}
 
         {similarPosts.length === 0 && (
-          <div className="rounded-2xl p-6 text-center" style={{ background: 'rgba(255,255,255,0.02)', border: '1px dashed rgba(180,90,40,0.2)' }}>
-            <p className="text-sm font-medium mb-1" style={{ color: '#9A7A62' }}>No similar requests found</p>
-            <p className="text-xs" style={{ color: '#5a3828' }}>Looks like your request is unique! Go ahead and publish it.</p>
+          <div className="rounded-2xl p-6 text-center" style={{ background: 'var(--bg-card)', border: '1px dashed rgba(180,90,40,0.2)' }}>
+            <p className="text-sm font-medium mb-1" style={{ color: 'var(--color-muted)' }}>No similar requests found</p>
+            <p className="text-xs" style={{ color: 'var(--color-subtle)' }}>Looks like your request is unique! Go ahead and publish it.</p>
           </div>
         )}
 
         {/* Confirm section */}
-        <div className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(180,90,40,0.18)' }}>
-          <p className="text-sm font-semibold mb-1" style={{ color: '#C8956A', fontFamily: 'Syne, sans-serif' }}>{form.title}</p>
+        <div className="rounded-2xl p-5" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)' }}>
+          <p className="text-sm font-semibold mb-1" style={{ color: 'var(--color-heading)', fontFamily: 'Syne, sans-serif' }}>{form.title}</p>
           <div className="flex flex-wrap gap-1.5 mt-2">
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold" style={colors?.style}>{selectedSubject}</span>
             {selectedTopics.map(t => (
-              <span key={t} className="px-2 py-0.5 rounded-full text-xs" style={{ background: 'rgba(193,127,58,0.1)', color: '#C8956A', border: '1px solid rgba(193,127,58,0.22)' }}>{t}</span>
+              <span key={t} className="px-2 py-0.5 rounded-full text-xs" style={{ background: 'rgba(193,127,58,0.1)', color: 'var(--color-heading)', border: '1px solid rgba(193,127,58,0.22)' }}>{t}</span>
             ))}
           </div>
         </div>

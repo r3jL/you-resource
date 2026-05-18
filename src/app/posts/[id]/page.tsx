@@ -41,39 +41,39 @@ export default async function PostPage({ params }: PageProps) {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs mb-6" style={{ color: '#5a3828' }}>
-        <a href="/" className="transition-colors duration-150 hover:text-[#C8956A]" style={{ color: '#9A7A62' }}>Home</a>
+      <nav className="flex items-center gap-2 text-xs mb-6" style={{ color: 'var(--color-subtle)' }}>
+        <a href="/" className="transition-colors duration-150" style={{ color: 'var(--color-muted)' }}>Home</a>
         <span>/</span>
-        <a href="/posts" className="transition-colors duration-150 hover:text-[#C8956A]" style={{ color: '#9A7A62' }}>Browse</a>
+        <a href="/posts" className="transition-colors duration-150" style={{ color: 'var(--color-muted)' }}>Browse</a>
         <span>/</span>
-        <span className="truncate max-w-xs" style={{ color: '#5a3828' }}>{post.title}</span>
+        <span className="truncate max-w-xs" style={{ color: 'var(--color-subtle)' }}>{post.title}</span>
       </nav>
 
       {/* Post Header */}
-      <div className="rounded-2xl p-6 mb-6" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(180,90,40,0.18)', backdropFilter: 'blur(12px)' }}>
+      <div className="rounded-2xl p-6 mb-6" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-card)', backdropFilter: 'blur(12px)' }}>
         <div className="flex items-center gap-3 mb-4">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold" style={colors.style}>
             {post.subject}
           </span>
-          <span className="text-xs" style={{ color: '#5a3828' }}>
+          <span className="text-xs" style={{ color: 'var(--color-subtle)' }}>
             {serializedResources.length} {serializedResources.length === 1 ? 'answer' : 'answers'}
           </span>
         </div>
 
-        <h1 className="text-2xl font-bold mb-3" style={{ fontFamily: 'Syne, sans-serif', color: '#C8956A' }}>{post.title}</h1>
-        <p className="leading-relaxed mb-5 text-sm" style={{ color: '#9A7A62' }}>{post.description}</p>
+        <h1 className="text-2xl font-bold mb-3" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>{post.title}</h1>
+        <p className="leading-relaxed mb-5 text-sm" style={{ color: 'var(--color-muted)' }}>{post.description}</p>
 
         {topics.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-5">
             {topics.map((topic) => (
-              <span key={topic} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ background: 'rgba(193,127,58,0.1)', color: '#C8956A', border: '1px solid rgba(193,127,58,0.22)' }}>
+              <span key={topic} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" style={{ background: 'var(--bg-badge)', color: 'var(--color-heading)', border: '1px solid rgba(193,127,58,0.22)' }}>
                 {topic}
               </span>
             ))}
           </div>
         )}
 
-        <div className="flex items-center gap-4 text-xs pt-4" style={{ borderTop: '1px solid rgba(180,90,40,0.12)', color: '#5a3828' }}>
+        <div className="flex items-center gap-4 text-xs pt-4" style={{ borderTop: '1px solid var(--border-subtle)', color: 'var(--color-subtle)' }}>
           <span className="flex items-center gap-1.5">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
