@@ -27,8 +27,8 @@ export default function LeftSidebar() {
     <div
       className="fixed left-0 z-40 flex flex-col"
       style={{
-        top: '60px',
-        height: 'calc(100vh - 60px)',
+        top: 'var(--navbar-h)',
+        height: 'calc(100vh - var(--navbar-h))',
         width: expanded ? `${EXPANDED}px` : `${COLLAPSED}px`,
         transition: 'width 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
         background: 'var(--bg-sidebar)',
