@@ -18,7 +18,7 @@ export default function ResourcesPage() {
           </svg>
           STUDY RESOURCES
         </div>
-        <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
+        <h1 className="text-3xl font-bold mb-2 pb-0.5" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
           Learning Resources
         </h1>
         <p style={{ color: 'var(--color-muted)' }}>
