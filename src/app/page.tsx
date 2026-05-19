@@ -1,7 +1,7 @@
 import { adminSupabase } from '@/lib/supabase/admin';
 import HomeClient from '@/components/HomeClient';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function HomePage() {
   const { data: recentPosts } = await adminSupabase

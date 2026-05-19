@@ -1,13 +1,14 @@
 import { adminSupabase } from '@/lib/supabase/admin';
 import PostsFilterClient from '@/components/PostsFilterClient';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function PostsPage() {
   const { data: rawPosts } = await adminSupabase
     .from('posts')
     .select('*, resources(count)')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .limit(100);
 
   const posts = (rawPosts || []).map((post) => ({
     id: post.id,

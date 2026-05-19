@@ -3,7 +3,7 @@ import { getSubjectColors } from '@/lib/subjectColors';
 import { adminSupabase } from '@/lib/supabase/admin';
 import RealtimePost from '@/components/RealtimePost';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 30;
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -12,19 +12,12 @@ interface PageProps {
 export default async function PostPage({ params }: PageProps) {
   const { id } = await params;
 
-  const { data: post, error } = await adminSupabase
-    .from('posts')
-    .select('*')
-    .eq('id', id)
-    .single();
+  const [{ data: post, error }, { data: resources }] = await Promise.all([
+    adminSupabase.from('posts').select('*').eq('id', id).single(),
+    adminSupabase.from('resources').select('*').eq('post_id', id).order('votes', { ascending: false }),
+  ]);
 
   if (error || !post) notFound();
-
-  const { data: resources } = await adminSupabase
-    .from('resources')
-    .select('*')
-    .eq('post_id', id)
-    .order('votes', { ascending: false });
 
   const colors = getSubjectColors(post.subject);
   let topics: string[] = [];
