@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Syne, JetBrains_Mono } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ClerkProvider } from '@clerk/nextjs';
 import { dark } from '@clerk/themes';
 import './globals.css';
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <LeftSidebar />
               <main style={{ paddingLeft: 56, minHeight: '100vh' }}>{children}</main>
             </div>
+            <SpeedInsights />
           </ThemeProvider>
         </body>
       </html>
