@@ -23,57 +23,82 @@ export default function PostCard({
     month: 'short', day: 'numeric', year: 'numeric',
   });
 
+  const visibleTopics = parsedTopics.slice(0, 4);
+  const overflow = parsedTopics.length - visibleTopics.length;
+
   return (
     <Link href={`/posts/${id}`} className="block group">
-      <div className="card p-5 cursor-pointer h-full">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <span
-            className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold"
-            style={colors.style}
-          >
+      <div className="post-card">
+        {/* Header row */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '3px 9px', borderRadius: 999,
+            ...colors.style,
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, fontWeight: 500,
+            letterSpacing: '.02em',
+          }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: colors.style.color, opacity: 0.9, flexShrink: 0 }} />
             {subject}
           </span>
-          <div className="flex items-center gap-1 text-xs shrink-0" style={{ color: 'var(--color-subtle)' }}>
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 5,
+            fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--muted)',
+          }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 1 0-5.66-5.66l-1 1"/>
+              <path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 1 0 5.66 5.66l1-1"/>
             </svg>
-            <span>{resourceCount} {resourceCount === 1 ? 'resource' : 'resources'}</span>
+            {resourceCount} {resourceCount === 1 ? 'resource' : 'resources'}
           </div>
         </div>
 
-        <h3
-          className="font-semibold mb-2 line-clamp-2 transition-colors duration-200"
-          style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}
-        >
-          {title}
-        </h3>
+        {/* Title */}
+        <h3 style={{
+          fontFamily: 'Syne, sans-serif', fontWeight: 600, fontSize: 17, lineHeight: 1.3,
+          color: 'var(--fg)', margin: '0 0 8px 0',
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+        }}>{title}</h3>
 
-        <p className="text-sm mb-3 line-clamp-2" style={{ color: 'var(--color-muted)' }}>{description}</p>
+        {/* Description */}
+        <p style={{
+          fontFamily: 'DM Sans, sans-serif', fontSize: 13.5, lineHeight: 1.5,
+          color: 'var(--muted)', margin: '0 0 14px 0',
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+        }}>{description}</p>
 
-        {parsedTopics.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            {parsedTopics.slice(0, 4).map((topic) => (
-              <span
-                key={topic}
-                className="inline-flex items-center px-2 py-0.5 rounded-lg text-xs"
-                style={{ background: 'var(--bg-badge)', color: 'var(--color-muted)', border: '1px solid var(--border-card)' }}
-              >
-                {topic}
-              </span>
+        {/* Topics */}
+        {visibleTopics.length > 0 && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14 }}>
+            {visibleTopics.map((t) => (
+              <span key={t} style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '3px 9px', borderRadius: 999,
+                background: 'rgba(200,149,106,0.07)',
+                border: '1px solid rgba(200,149,106,0.20)',
+                color: 'var(--amber)',
+                fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: 11.5,
+              }}>{t}</span>
             ))}
-            {parsedTopics.length > 4 && (
-              <span
-                className="inline-flex items-center px-2 py-0.5 rounded-lg text-xs"
-                style={{ background: 'var(--bg-input)', color: 'var(--color-subtle)' }}
-              >
-                +{parsedTopics.length - 4} more
-              </span>
+            {overflow > 0 && (
+              <span style={{
+                padding: '3px 9px', borderRadius: 999,
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px dashed rgba(200,149,106,0.20)',
+                color: 'var(--muted)',
+                fontFamily: 'DM Sans, sans-serif', fontWeight: 500, fontSize: 11.5,
+              }}>+{overflow} more</span>
             )}
           </div>
         )}
 
-        <div className="flex items-center justify-between text-xs" style={{ color: 'var(--color-subtle)', borderTop: '1px solid var(--border-subtle)', paddingTop: '10px', marginTop: '4px' }}>
-          <span>by {authorName}</span>
+        {/* Footer */}
+        <div style={{
+          paddingTop: 12, borderTop: '1px solid var(--border-soft)',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: 'var(--dim)',
+        }}>
+          <span>by <span style={{ color: 'var(--muted)' }}>{authorName}</span></span>
           <span>{formattedDate}</span>
         </div>
       </div>

@@ -2,116 +2,110 @@ import { competitionsList } from '@/lib/sidebarData';
 
 export const metadata = { title: 'Competitions — StudyHub' };
 
-const categoryColors: Record<string, { bg: string; color: string; border: string }> = {
-  'Algo Trading':         { bg: 'rgba(16,185,129,0.08)',  color: '#6ee7b7', border: 'rgba(16,185,129,0.2)' },
-  'ML & Alpha Research':  { bg: 'rgba(99,102,241,0.08)',  color: '#a5b4fc', border: 'rgba(99,102,241,0.2)' },
-  'ML & Data Science':    { bg: 'rgba(99,102,241,0.08)',  color: '#a5b4fc', border: 'rgba(99,102,241,0.2)' },
-  'Quant Research':       { bg: 'rgba(245,158,11,0.08)',  color: '#fcd34d', border: 'rgba(245,158,11,0.2)' },
-  'Trading Simulation':   { bg: 'rgba(14,165,233,0.08)',  color: '#7dd3fc', border: 'rgba(14,165,233,0.2)' },
-  'Discovery Program':    { bg: 'rgba(212,146,63,0.08)',  color: '#C8956A', border: 'rgba(212,146,63,0.2)' },
-  'SWE / Trading':        { bg: 'rgba(236,72,153,0.08)',  color: '#f9a8d4', border: 'rgba(236,72,153,0.2)' },
+const CATEGORY_COLORS: Record<string, { color: string; bg: string; border: string }> = {
+  'Algo Trading':        { color: '#34D399', bg: 'rgba(52,211,153,0.10)',  border: 'rgba(52,211,153,0.28)' },
+  'ML & Alpha Research': { color: '#818CF8', bg: 'rgba(129,140,248,0.10)', border: 'rgba(129,140,248,0.28)' },
+  'ML & Data Science':   { color: '#818CF8', bg: 'rgba(129,140,248,0.10)', border: 'rgba(129,140,248,0.28)' },
+  'Quant Research':      { color: '#D4A574', bg: 'rgba(212,165,116,0.12)', border: 'rgba(212,165,116,0.30)' },
+  'Trading Simulation':  { color: '#38BDF8', bg: 'rgba(56,189,248,0.10)',  border: 'rgba(56,189,248,0.28)' },
+  'Discovery Program':   { color: '#FB923C', bg: 'rgba(251,146,60,0.10)',  border: 'rgba(251,146,60,0.28)' },
+  'SWE / Trading':       { color: '#F472B6', bg: 'rgba(244,114,182,0.10)', border: 'rgba(244,114,182,0.28)' },
 };
-
-function StatusBadge({ status }: { status: string }) {
-  const isOpen = status === 'open';
-  return (
-    <span
-      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium"
-      style={{
-        background: isOpen ? 'rgba(16,185,129,0.1)' : 'var(--bg-badge)',
-        color: isOpen ? '#6ee7b7' : 'var(--color-muted)',
-        border: `1px solid ${isOpen ? 'rgba(16,185,129,0.25)' : 'var(--border-card)'}`,
-      }}
-    >
-      <span className="w-1.5 h-1.5 rounded-full" style={{ background: isOpen ? '#10b981' : 'var(--color-muted)' }} />
-      {isOpen ? 'Open' : 'TBA'}
-    </span>
-  );
-}
 
 export default function CompetitionsPage() {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 py-10">
+    <div style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 24px 80px' }}>
       {/* Header */}
-      <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs mb-4" style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          background: 'rgba(16,185,129,0.08)',
-          border: '1px solid rgba(16,185,129,0.2)',
-          color: '#6ee7b7',
+      <header style={{ marginBottom: 28 }}>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+          padding: '5px 12px', borderRadius: 999,
+          background: 'rgba(52,211,153,0.10)',
+          border: '1px solid rgba(52,211,153,0.25)',
+          color: '#34D399',
+          fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, fontWeight: 500,
+          letterSpacing: '.06em', marginBottom: 14,
         }}>
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/>
           </svg>
           COMPETITIONS
         </div>
-        <h1 className="text-3xl font-bold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
-          Quant Competitions
-        </h1>
-        <p style={{ color: 'var(--color-muted)' }}>
+        <h1 style={{
+          fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: 36, color: 'var(--fg)',
+          margin: '0 0 8px 0', letterSpacing: '-0.01em',
+        }}>Quant Competitions</h1>
+        <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 15, color: 'var(--muted)', margin: 0, maxWidth: 560 }}>
           Algorithmic trading, quant research, and discovery programs from top firms.
         </p>
-      </div>
+      </header>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div style={{
+        display: 'grid', gap: 14,
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+      }}>
         {competitionsList.map((item) => {
-          const catStyle = categoryColors[item.category] ?? { bg: 'var(--bg-badge)', color: 'var(--color-heading)', border: 'rgba(193,127,58,0.2)' };
+          const cat = CATEGORY_COLORS[item.category] ?? { color: '#C8956A', bg: 'rgba(200,149,106,0.10)', border: 'rgba(200,149,106,0.28)' };
+          const isOpen = item.status === 'open';
           return (
-            <a
-              key={item.url + item.title}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block rounded-2xl p-5 transition-all duration-200"
-              style={{ background: 'var(--bg-answer)', border: '1px solid var(--border-card)' }}
-            >
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="min-w-0">
-                  <h3 className="font-semibold mb-1 truncate" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
-                    {item.title}
-                  </h3>
-                  <p className="text-xs" style={{ color: 'var(--color-subtle)', fontFamily: 'JetBrains Mono, monospace' }}>
-                    {item.org}
-                  </p>
-                </div>
-                <svg
-                  className="w-4 h-4 shrink-0 mt-0.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  style={{ color: 'var(--color-subtle)' }}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            <a key={item.url + item.title} href={item.url} target="_blank" rel="noreferrer" className="resource-card">
+              <div className="resource-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M19 13v6H5V5h6"/>
                 </svg>
               </div>
+              <h3 style={{
+                fontFamily: 'Syne, sans-serif', fontWeight: 600, fontSize: 15.5, color: 'var(--fg)',
+                margin: '0 0 4px 0', lineHeight: 1.3, paddingRight: 22,
+                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+              }}>{item.title}</h3>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, color: 'var(--muted)', marginBottom: 10 }}>
+                {item.org}
+              </div>
+              <p style={{
+                fontFamily: 'DM Sans, sans-serif', fontSize: 12.5, color: 'var(--muted)',
+                lineHeight: 1.45, margin: '0 0 12px 0', flex: 1,
+                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+              } as React.CSSProperties}>{item.description}</p>
 
-              <p className="text-sm mb-3 line-clamp-2" style={{ color: 'var(--color-muted)' }}>{item.description}</p>
-
-              <div className="flex flex-wrap items-center gap-1.5 mb-3">
-                <span
-                  className="px-2 py-0.5 rounded-full text-xs font-medium"
-                  style={{ background: catStyle.bg, color: catStyle.color, border: `1px solid ${catStyle.border}` }}
-                >
-                  {item.category}
-                </span>
-                <StatusBadge status={item.status} />
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+                <span style={{
+                  padding: '3px 9px', borderRadius: 6,
+                  background: cat.bg, border: `1px solid ${cat.border}`, color: cat.color,
+                  fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, fontWeight: 500,
+                }}>{item.category}</span>
+                <span style={{
+                  padding: '3px 9px', borderRadius: 6,
+                  background: isOpen ? 'rgba(52,211,153,0.10)' : 'rgba(255,255,255,0.04)',
+                  border: isOpen ? '1px solid rgba(52,211,153,0.28)' : '1px solid var(--border-soft)',
+                  color: isOpen ? '#34D399' : 'var(--muted)',
+                  fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, fontWeight: 500,
+                  display: 'inline-flex', alignItems: 'center', gap: 5,
+                }}>● {isOpen ? 'Open' : 'TBA'}</span>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 text-xs" style={{ color: 'var(--color-subtle)' }}>
+              <div style={{
+                paddingTop: 10, borderTop: '1px solid var(--border-soft)',
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8,
+                fontFamily: 'JetBrains Mono, monospace', fontSize: 11,
+              }}>
                 {item.prize && (
-                  <div className="flex items-center gap-1.5">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--amber)' }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="8"/>
+                      <path d="M12 8v8M9.5 10.5c0-1 1.1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1.1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/>
                     </svg>
-                    <span style={{ color: 'var(--color-heading)' }}>{item.prize}</span>
-                  </div>
+                    {item.prize}
+                  </span>
                 )}
                 {item.deadline && (
-                  <div className="flex items-center gap-1.5">
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: 'var(--muted)' }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/>
                     </svg>
                     {item.deadline}
-                  </div>
+                  </span>
                 )}
               </div>
             </a>

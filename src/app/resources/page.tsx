@@ -4,65 +4,67 @@ export const metadata = { title: 'Resources — StudyHub' };
 
 export default function ResourcesPage() {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 py-10">
+    <div style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 24px 80px' }}>
       {/* Header */}
-      <div className="mb-8">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs mb-4" style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          background: 'rgba(99,102,241,0.08)',
-          border: '1px solid rgba(99,102,241,0.2)',
-          color: '#818cf8',
+      <header style={{ marginBottom: 28 }}>
+        <div style={{
+          display: 'inline-flex', alignItems: 'center', gap: 8,
+          padding: '5px 12px', borderRadius: 999,
+          background: 'rgba(167,139,250,0.10)',
+          border: '1px solid rgba(167,139,250,0.25)',
+          color: '#A78BFA',
+          fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, fontWeight: 500,
+          letterSpacing: '.06em', marginBottom: 14,
         }}>
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 1 0-5.66-5.66l-1 1"/>
+            <path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 1 0 5.66 5.66l1-1"/>
           </svg>
           STUDY RESOURCES
         </div>
-        <h1 className="text-3xl font-bold mb-2 pb-0.5" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
-          Learning Resources
-        </h1>
-        <p style={{ color: 'var(--color-muted)' }}>
+        <h1 style={{
+          fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: 36, color: 'var(--fg)',
+          margin: '0 0 8px 0', letterSpacing: '-0.01em',
+        }}>Learning Resources</h1>
+        <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 15, color: 'var(--muted)', margin: 0, maxWidth: 560 }}>
           Curated platforms and tools for quantitative finance, mathematics, and computer science.
         </p>
-      </div>
+      </header>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {quickResources.map((item) => (
-          <a
-            key={item.url}
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block rounded-2xl p-5 transition-all duration-200"
-            style={{
-              background: 'var(--bg-answer)',
-              border: '1px solid var(--border-card)',
-            }}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <h3 className="font-semibold mb-1 truncate" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
-                  {item.title}
-                </h3>
-                <p className="text-sm" style={{ color: 'var(--color-muted)' }}>{item.description}</p>
+      <div style={{
+        display: 'grid', gap: 14,
+        gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+      }}>
+        {quickResources.map((item) => {
+          let host = item.url;
+          try { host = new URL(item.url).hostname.replace('www.', ''); } catch { /* ignore */ }
+          return (
+            <a key={item.url} href={item.url} target="_blank" rel="noreferrer" className="resource-card">
+              <div className="resource-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M14 5h5v5"/><path d="M19 5 10 14"/><path d="M19 13v6H5V5h6"/>
+                </svg>
               </div>
-              <svg
-                className="w-4 h-4 shrink-0 mt-0.5 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                style={{ color: 'var(--color-subtle)' }}
-                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </div>
-            <div className="mt-3 flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#6366f1', opacity: 0.7 }} />
-              <span className="text-xs truncate" style={{ color: 'var(--color-subtle)', fontFamily: 'JetBrains Mono, monospace' }}>
-                {new URL(item.url).hostname.replace('www.', '')}
-              </span>
-            </div>
-          </a>
-        ))}
+              <h3 style={{
+                fontFamily: 'Syne, sans-serif', fontWeight: 600, fontSize: 15.5, color: 'var(--fg)',
+                margin: '0 0 6px 0', lineHeight: 1.3, paddingRight: 22,
+              }}>{item.title}</h3>
+              <p style={{
+                fontFamily: 'DM Sans, sans-serif', fontSize: 12.5, color: 'var(--muted)',
+                lineHeight: 1.45, margin: '0 0 14px 0', flex: 1,
+              }}>{item.description}</p>
+              <div style={{
+                paddingTop: 10, borderTop: '1px solid var(--border-soft)',
+                display: 'flex', alignItems: 'center', gap: 7,
+                fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, color: 'var(--muted)',
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#A78BFA', flexShrink: 0 }} />
+                {host}
+              </div>
+            </a>
+          );
+        })}
       </div>
     </div>
   );

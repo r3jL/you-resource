@@ -29,28 +29,36 @@ export default function RealtimePost({ postId, initialResources }: {
     } catch { /* ignore */ }
   }, [postId]);
 
+  const sorted = [...resources].sort((a, b) => b.votes - a.votes);
+
   return (
     <>
-      <div className="mb-6">
-        <h2 className="text-lg font-bold mb-4" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
-          Answers <span style={{ color: 'var(--color-subtle)', fontSize: '0.875rem', fontWeight: 400 }}>({resources.length})</span>
-        </h2>
+      <h2 style={{
+        fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: 22,
+        color: 'var(--fg)', margin: '0 0 16px 0', letterSpacing: '-0.01em',
+      }}>
+        {resources.length} {resources.length === 1 ? 'Answer' : 'Answers'}
+      </h2>
 
-        {resources.length === 0 ? (
-          <div className="rounded-2xl p-8 text-center mb-4" style={{ background: 'var(--bg-card)', border: '1px dashed var(--border-card)' }}>
-            <p className="font-medium text-sm mb-1" style={{ color: 'var(--color-muted)' }}>No answers yet</p>
-            <p className="text-xs" style={{ color: 'var(--color-subtle)' }}>Be the first to share a resource for this request!</p>
-          </div>
-        ) : (
-          <div className="space-y-3 mb-4">
-            {[...resources].sort((a, b) => b.votes - a.votes).map(resource => (
-              <AnswerCard key={resource.id} resource={resource} />
-            ))}
-          </div>
-        )}
+      {resources.length === 0 ? (
+        <div style={{
+          padding: '56px 28px', textAlign: 'center', borderRadius: 16,
+          background: 'var(--card-bg)', border: '1px dashed var(--border)',
+          marginBottom: 24,
+        }}>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 14.5, color: 'var(--muted)', margin: 0 }}>
+            No answers yet. Be the first to share a resource!
+          </p>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 32 }}>
+          {sorted.map(resource => (
+            <AnswerCard key={resource.id} resource={resource} />
+          ))}
+        </div>
+      )}
 
-        <AddAnswerForm postId={postId} onResourceAdded={fetchResources} />
-      </div>
+      <AddAnswerForm postId={postId} onResourceAdded={fetchResources} />
     </>
   );
 }

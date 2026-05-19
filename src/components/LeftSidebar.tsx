@@ -9,9 +9,37 @@ const COLLAPSED = 56;
 const EXPANDED = 224;
 
 const NAV_ITEMS = [
-  { href: '/resources', label: 'Resources', paths: ['M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1'] },
-  { href: '/competitions', label: 'Competitions', paths: ['M13 10V3L4 14h7v7l9-11h-7z'] },
-  { href: '/my-requests', label: 'My Requests', paths: ['M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'] },
+  {
+    href: '/resources',
+    label: 'Resources',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/>
+        <path d="M8 7h8M8 11h6"/>
+      </svg>
+    ),
+  },
+  {
+    href: '/competitions',
+    label: 'Competitions',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+        <path d="M6 4h12v4a6 6 0 0 1-12 0V4z"/>
+        <path d="M6 5H3v3a3 3 0 0 0 3 3M18 5h3v3a3 3 0 0 1-3 3"/>
+        <path d="M10 14h4v3h-4z"/><path d="M9 21h6"/><path d="M12 17v4"/>
+      </svg>
+    ),
+  },
+  {
+    href: '/my-requests',
+    label: 'My Requests',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+        <rect x="7" y="4" width="10" height="4" rx="1"/>
+        <path d="M7 6H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2"/>
+      </svg>
+    ),
+  },
 ];
 
 export default function LeftSidebar() {
@@ -24,77 +52,78 @@ export default function LeftSidebar() {
   const initial = displayName.charAt(0).toUpperCase();
 
   return (
-    <div
-      className="fixed left-0 z-40 flex flex-col"
-      style={{
-        top: 'var(--navbar-h)',
-        height: 'calc(100vh - var(--navbar-h))',
-        width: expanded ? `${EXPANDED}px` : `${COLLAPSED}px`,
-        transition: 'width 0.22s cubic-bezier(0.4, 0, 0.2, 1)',
-        background: 'var(--bg-sidebar)',
-        borderRight: '1px solid var(--border-nav)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        overflow: 'hidden',
-        boxShadow: expanded ? 'var(--shadow-sidebar)' : 'none',
-      }}
+    <aside
       onMouseEnter={() => setExpanded(true)}
       onMouseLeave={() => setExpanded(false)}
+      style={{
+        position: 'fixed', top: 'var(--navbar-h)', left: 0, bottom: 0,
+        width: expanded ? `${EXPANDED}px` : `${COLLAPSED}px`,
+        background: 'var(--sidebar-bg)',
+        borderRight: '1px solid var(--border)',
+        backdropFilter: 'blur(14px)',
+        transition: 'width .22s cubic-bezier(.4,0,.2,1)',
+        zIndex: 60,
+        display: 'flex', flexDirection: 'column',
+        padding: '16px 8px 12px 8px',
+        overflow: 'hidden',
+      }}
     >
-      <div className="h-3" />
-      <nav className="flex-1 px-2 space-y-0.5">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {NAV_ITEMS.map((item) => {
           const active = pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-2.5 py-2.5 rounded-xl transition-colors duration-150"
-              style={active ? { background: 'rgba(193,127,58,0.15)', color: 'var(--color-heading)' } : { color: 'var(--color-muted)' }}
-              onMouseEnter={e => { if (!active) { e.currentTarget.style.background = 'rgba(193,127,58,0.07)'; e.currentTarget.style.color = 'var(--color-heading)'; } }}
-              onMouseLeave={e => { if (!active) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-muted)'; } }}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 12,
+                padding: '10px 12px', borderRadius: 10,
+                color: active ? 'var(--amber)' : 'var(--muted)',
+                background: active ? 'rgba(193,127,58,0.12)' : 'transparent',
+                border: active ? '1px solid rgba(193,127,58,0.30)' : '1px solid transparent',
+                width: '100%', textAlign: 'left',
+                fontFamily: 'DM Sans, sans-serif', fontSize: 13.5, fontWeight: 500,
+                cursor: 'pointer', textDecoration: 'none',
+                transition: 'color .15s, background .15s, border-color .15s',
+              }}
             >
-              <span className="flex items-center justify-center shrink-0" style={{ width: '20px' }}>
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  {item.paths.map((d, i) => <path key={i} d={d} />)}
-                </svg>
-              </span>
-              <span className="text-sm font-medium whitespace-nowrap" style={{ opacity: expanded ? 1 : 0, transform: expanded ? 'translateX(0)' : 'translateX(-4px)', transition: 'opacity 0.18s ease, transform 0.18s ease', transitionDelay: expanded ? '0.06s' : '0s' }}>
-                {item.label}
-              </span>
-              {active && <span className="ml-auto shrink-0 w-1.5 h-1.5 rounded-full" style={{ background: '#C17F3A', opacity: expanded ? 1 : 0, transition: 'opacity 0.15s ease' }} />}
+              <span style={{ flexShrink: 0, display: 'flex' }}>{item.icon}</span>
+              <span style={{
+                opacity: expanded ? 1 : 0,
+                transform: expanded ? 'translateX(0)' : 'translateX(-6px)',
+                transition: 'opacity .18s, transform .22s',
+                whiteSpace: 'nowrap',
+              }}>{item.label}</span>
             </Link>
           );
         })}
-      </nav>
-
-      <div className="px-2 py-3 flex items-center gap-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-        <div
-          className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold uppercase shrink-0"
-          style={{
-            background: isSignedIn ? 'rgba(193,127,58,0.18)' : 'var(--bg-badge)',
-            color: isSignedIn ? 'var(--color-heading)' : 'var(--color-subtle)',
-            border: `1px solid ${isSignedIn ? 'rgba(193,127,58,0.28)' : 'var(--border-card)'}`,
-            minWidth: '32px',
-          }}
-        >
-          {isSignedIn ? initial : (
-            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          )}
-        </div>
-        <div style={{ opacity: expanded ? 1 : 0, transform: expanded ? 'translateX(0)' : 'translateX(-4px)', transition: 'opacity 0.18s ease, transform 0.18s ease', transitionDelay: expanded ? '0.06s' : '0s', overflow: 'hidden', minWidth: 0 }}>
-          {isSignedIn ? (
-            <>
-              <p className="text-sm font-semibold leading-tight truncate" style={{ color: 'var(--color-heading)', maxWidth: `${EXPANDED - COLLAPSED - 20}px` }}>{displayName}</p>
-              <p className="text-xs leading-tight truncate mt-0.5" style={{ color: 'var(--color-subtle)', maxWidth: `${EXPANDED - COLLAPSED - 20}px` }}>{email}</p>
-            </>
-          ) : (
-            <p className="text-xs" style={{ color: 'var(--color-subtle)' }}>Not signed in</p>
-          )}
-        </div>
       </div>
-    </div>
+
+      {/* User info at bottom */}
+      <div style={{ marginTop: 'auto' }}>
+        {isSignedIn && (
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 10,
+            padding: '10px 8px',
+            borderTop: '1px solid var(--border)',
+            overflow: 'hidden',
+          }}>
+            <div style={{
+              width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
+              background: 'linear-gradient(135deg, #C17F3A, rgba(193,127,58,0.6))',
+              display: 'grid', placeItems: 'center', color: '#1a0e05', fontWeight: 700, fontSize: 11,
+              fontFamily: 'DM Sans, sans-serif',
+            }}>{initial}</div>
+            <div style={{
+              opacity: expanded ? 1 : 0, transition: 'opacity .18s',
+              whiteSpace: 'nowrap', overflow: 'hidden',
+            }}>
+              <div style={{ fontFamily: 'DM Sans, sans-serif', fontWeight: 600, fontSize: 12.5, color: 'var(--fg)' }}>{displayName}</div>
+              <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10.5, color: 'var(--muted)' }}>{email}</div>
+            </div>
+          </div>
+        )}
+      </div>
+    </aside>
   );
 }

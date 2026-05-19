@@ -1,72 +1,88 @@
-// Dark-theme subject color system for QuantSun-style UI
-// Returns inline style objects since these use rgba values not in Tailwind's default palette
-
 export interface SubjectStyle {
   bg: string;
   text: string;
   border: string;
-  // Inline style version for glassmorphic badges
-  style: {
-    background: string;
-    color: string;
-    border: string;
-  };
+  style: { background: string; color: string; border: string };
 }
 
 const subjectMap: Record<string, SubjectStyle> = {
   Mathematics: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(99,102,241,0.12)', color: '#a5b4fc', border: '1px solid rgba(99,102,241,0.28)' },
-  },
-  Physics: {
-    bg: '', text: '', border: '',
-    style: { background: 'rgba(139,92,246,0.12)', color: '#c4b5fd', border: '1px solid rgba(139,92,246,0.28)' },
+    style: { background: 'rgba(91,141,239,0.12)', color: '#5B8DEF', border: '1px solid rgba(91,141,239,0.30)' },
   },
   'Computer Science': {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(16,185,129,0.12)', color: '#6ee7b7', border: '1px solid rgba(16,185,129,0.28)' },
+    style: { background: 'rgba(167,139,250,0.12)', color: '#A78BFA', border: '1px solid rgba(167,139,250,0.30)' },
   },
-  Chemistry: {
+  Finance: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(20,184,166,0.12)', color: '#5eead4', border: '1px solid rgba(20,184,166,0.28)' },
+    style: { background: 'rgba(212,165,116,0.14)', color: '#D4A574', border: '1px solid rgba(212,165,116,0.32)' },
   },
-  Biology: {
+  Physics: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(34,197,94,0.12)', color: '#86efac', border: '1px solid rgba(34,197,94,0.28)' },
+    style: { background: 'rgba(78,205,196,0.12)', color: '#4ECDC4', border: '1px solid rgba(78,205,196,0.30)' },
   },
-  History: {
+  'Machine Learning': {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(245,158,11,0.12)', color: '#fcd34d', border: '1px solid rgba(245,158,11,0.28)' },
+    style: { background: 'rgba(192,132,252,0.12)', color: '#C084FC', border: '1px solid rgba(192,132,252,0.30)' },
+  },
+  Statistics: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(96,165,250,0.12)', color: '#60A5FA', border: '1px solid rgba(96,165,250,0.30)' },
   },
   Economics: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(234,179,8,0.12)', color: '#fde047', border: '1px solid rgba(234,179,8,0.28)' },
+    style: { background: 'rgba(233,168,122,0.13)', color: '#E9A87A', border: '1px solid rgba(233,168,122,0.30)' },
   },
-  Literature: {
+  Algorithms: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(244,63,94,0.12)', color: '#fda4af', border: '1px solid rgba(244,63,94,0.28)' },
+    style: { background: 'rgba(244,114,182,0.12)', color: '#F472B6', border: '1px solid rgba(244,114,182,0.30)' },
   },
-  Geography: {
+  Probability: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(249,115,22,0.12)', color: '#fdba74', border: '1px solid rgba(249,115,22,0.28)' },
-  },
-  Philosophy: {
-    bg: '', text: '', border: '',
-    style: { background: 'rgba(167,139,250,0.12)', color: '#ddd6fe', border: '1px solid rgba(167,139,250,0.28)' },
-  },
-  Psychology: {
-    bg: '', text: '', border: '',
-    style: { background: 'rgba(236,72,153,0.12)', color: '#f9a8d4', border: '1px solid rgba(236,72,153,0.28)' },
+    style: { background: 'rgba(125,211,252,0.12)', color: '#7DD3FC', border: '1px solid rgba(125,211,252,0.30)' },
   },
   Engineering: {
     bg: '', text: '', border: '',
-    style: { background: 'rgba(14,165,233,0.12)', color: '#7dd3fc', border: '1px solid rgba(14,165,233,0.28)' },
+    style: { background: 'rgba(251,146,60,0.12)', color: '#FB923C', border: '1px solid rgba(251,146,60,0.30)' },
+  },
+  Chemistry: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(52,211,153,0.12)', color: '#34D399', border: '1px solid rgba(52,211,153,0.30)' },
+  },
+  Biology: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(163,230,53,0.12)', color: '#A3E635', border: '1px solid rgba(163,230,53,0.30)' },
+  },
+  'Data Science': {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(99,102,241,0.12)', color: '#818CF8', border: '1px solid rgba(99,102,241,0.30)' },
+  },
+  History: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(245,158,11,0.12)', color: '#FCD34D', border: '1px solid rgba(245,158,11,0.28)' },
+  },
+  Literature: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(244,63,94,0.12)', color: '#FDA4AF', border: '1px solid rgba(244,63,94,0.28)' },
+  },
+  Philosophy: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(167,139,250,0.12)', color: '#DDD6FE', border: '1px solid rgba(167,139,250,0.28)' },
+  },
+  Psychology: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(236,72,153,0.12)', color: '#F9A8D4', border: '1px solid rgba(236,72,153,0.28)' },
+  },
+  Geography: {
+    bg: '', text: '', border: '',
+    style: { background: 'rgba(249,115,22,0.12)', color: '#FDBA74', border: '1px solid rgba(249,115,22,0.28)' },
   },
 };
 
 const defaultStyle: SubjectStyle = {
   bg: '', text: '', border: '',
-  style: { background: 'rgba(193,127,58,0.12)', color: '#C8956A', border: '1px solid rgba(193,127,58,0.28)' },
+  style: { background: 'rgba(200,149,106,0.12)', color: '#C8956A', border: '1px solid rgba(200,149,106,0.28)' },
 };
 
 export function getSubjectColors(subject: string): SubjectStyle {

@@ -27,37 +27,53 @@ export default async function MyRequestsPage() {
   }));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="flex items-center justify-between mb-8">
+    <div style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 24px 80px' }}>
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
         <div>
-          <h1 className="text-3xl font-bold" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>
-            My Requests
-          </h1>
-          <p className="mt-1 text-sm" style={{ color: 'var(--color-subtle)' }}>
-            {posts.length} request{posts.length !== 1 ? 's' : ''} you&apos;ve posted
+          <h1 style={{
+            fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: 30, color: 'var(--fg)',
+            margin: '0 0 6px 0', letterSpacing: '-0.01em',
+          }}>My Requests</h1>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 14, color: 'var(--muted)', margin: 0 }}>
+            {posts.length} {posts.length === 1 ? 'request' : 'requests'} you&apos;ve posted
           </p>
         </div>
-        <a href="/request" className="btn-primary">
-          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+        <a href="/request" className="btn-amber" style={{
+          padding: '10px 18px', borderRadius: 10, fontSize: 14,
+          display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600,
+          textDecoration: 'none', flexShrink: 0,
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 5v14M5 12h14"/>
           </svg>
           New Request
         </a>
-      </div>
+      </header>
 
       {posts.length === 0 ? (
-        <div className="card p-12 text-center">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'var(--bg-badge)' }}>
-            <svg className="w-8 h-8" style={{ color: '#C17F3A' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        <div style={{
+          padding: '56px 28px', textAlign: 'center', borderRadius: 16,
+          background: 'var(--card-bg)', border: '1px dashed var(--border)',
+        }}>
+          <div style={{ color: 'var(--muted)', marginBottom: 16 }}>
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block' }}>
+              <rect x="7" y="4" width="10" height="4" rx="1"/>
+              <path d="M7 6H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-2"/>
             </svg>
           </div>
-          <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Syne, sans-serif', color: 'var(--color-heading)' }}>No requests yet</h3>
-          <p className="mb-6" style={{ color: 'var(--color-muted)' }}>You haven&apos;t posted any resource requests yet.</p>
-          <a href="/request" className="btn-primary">Request Resources</a>
+          <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 600, fontSize: 19, color: 'var(--fg)', margin: '0 0 6px 0' }}>No requests yet</h3>
+          <p style={{ fontFamily: 'DM Sans, sans-serif', fontSize: 13.5, color: 'var(--muted)', margin: '0 auto 18px', maxWidth: 360 }}>
+            When you post a resource request, it&apos;ll show up here.
+          </p>
+          <a href="/request" className="btn-amber" style={{ padding: '9px 18px', borderRadius: 10, fontSize: 13.5, fontWeight: 600, textDecoration: 'none' }}>
+            Request Resources
+          </a>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div style={{
+          display: 'grid', gap: 16,
+          gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+        }}>
           {posts.map((post) => (
             <PostCard
               key={post.id}

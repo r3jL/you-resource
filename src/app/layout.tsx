@@ -43,7 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             backgroundColor: 'rgba(255,255,255,0.08)',
             border: '1px solid rgba(180,90,40,0.25)',
             color: '#E8D5C0',
-            '&:hover': { backgroundColor: 'rgba(255,255,255,0.12)' },
           },
           socialButtonsBlockButtonText: { color: '#E8D5C0' },
           dividerLine: { backgroundColor: 'rgba(180,90,40,0.2)' },
@@ -56,7 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           },
           formButtonPrimary: {
             backgroundColor: '#C17F3A',
-            '&:hover': { backgroundColor: '#D4923F' },
           },
           footerActionLink: { color: '#C8956A' },
           footerActionText: { color: '#9A7A62' },
@@ -77,20 +75,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <html lang="en" className={`${dmSans.variable} ${syne.variable} ${jetbrainsMono.variable}`}>
         <head>
-          {/* Prevent flash of unstyled content on theme load */}
           <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
         </head>
         <body style={{ minHeight: '100vh' }}>
           <ThemeProvider>
-            <Navbar />
-            <LeftSidebar />
-            <main className="min-h-screen" style={{ marginLeft: '56px' }}>{children}</main>
-            <footer className="mt-20 py-8" style={{ borderTop: '1px solid var(--border-nav)', marginLeft: '56px' }}>
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm" style={{ color: 'var(--color-subtle)' }}>
-                <p>StudyHub — A community platform for sharing study resources</p>
-                <p className="mt-1">Built with Next.js, Supabase, and Google Gemini AI</p>
-              </div>
-            </footer>
+            <div style={{ position: 'relative', zIndex: 2, minHeight: '100vh' }}>
+              <Navbar />
+              <LeftSidebar />
+              <main style={{ paddingLeft: 56, minHeight: '100vh' }}>{children}</main>
+            </div>
           </ThemeProvider>
         </body>
       </html>
